@@ -95,6 +95,37 @@ const quotes = [
     }
 ];
 
+/* 
+
+Function to set random color of the background. Called by: 
+
+document.body.style.background = genRandomColor();
+
+
+*/
+
+function genRandomColor() {
+  const r = Math.floor(Math.random() * 256);
+  const g = Math.floor(Math.random() * 256);
+  const b = Math.floor(Math.random() * 256);
+  return `rgb(${r}, ${g}, ${b})`;
+}
+
+/* 
+
+Everytime a user loads the page, the page will load a new quote automatically at a random interval
+between 10 and 20 seconds. 
+
+The set Interval() function takes a value in ms, so we multiply returned value of setRandomIntervalTimer by 1000
+to give a value in ms. 
+
+*/
+
+function setRandomIntervalTimer(min, max) {
+  return 1000 * (Math.random() * (max - min) + min);
+}
+
+setInterval(printQuote, setRandomIntervalTimer(10,20));
 
 /* 
 The getRandomQuote() function: 
@@ -123,7 +154,8 @@ The printQuote() function:
 2. Create a template literal to display our quote. Check if returned object, 
 has citation or year property. If present, append these to the string. 
 3. Once the two conditional if statements are evaluated, append </p> to end of htmlString.
-4. Use document.getElementById and .innerHTML method to assign the new HTML string to quote-box div. 
+4. Use document.getElementById and .innerHTML method to assign the new HTML string to quote-box div.
+5. Set random background color of document body element with value output by genRandomColor() function
 */
 
 
@@ -145,8 +177,8 @@ function printQuote() {
 
     htmlString += "</p>";
     document.getElementById('quote-box').innerHTML = htmlString;
+    document.body.style.background = genRandomColor();
 }
-
 
 
 /***
